@@ -25,7 +25,7 @@ var allowCrossDomain = function(req, res, next) {
 
 // configure it
 app.configure(function(){
-  app.use(allowCrossDomain);
+  // app.use(allowCrossDomain);
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
