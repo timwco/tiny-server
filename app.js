@@ -68,7 +68,8 @@ app.param('collectionName', function(req, res, next, collectionName){
 app.get('/collections/:collectionName', function(req, res) {
   req.collection.find({},{limit:10, sort: [['_id',-1]]}).toArray(function(e, results){
     if (e) return next(e)
-    res.send(results)
+    // res.send(results)
+    res.jsonp(results)
   })
 })
 
