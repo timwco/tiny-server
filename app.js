@@ -25,8 +25,7 @@ var allowCrossDomain = function(req, res, next) {
 
 // configure it
 app.configure(function(){
-  // app.use(allowCrossDomain);
-  app.set("jsonp callback", true);
+  app.use(allowCrossDomain);
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -68,8 +67,7 @@ app.param('collectionName', function(req, res, next, collectionName){
 app.get('/collections/:collectionName', function(req, res) {
   req.collection.find({},{limit:10, sort: [['_id',-1]]}).toArray(function(e, results){
     if (e) return next(e)
-    // res.send(results)
-    res.jsonp(results)
+    res.send(results)
   })
 })
 
