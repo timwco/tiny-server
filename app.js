@@ -66,7 +66,10 @@ app.param('collectionName', function(req, res, next, collectionName){
 // GET /collections/:collectionName
 app.get('/collections/:collectionName', function(req, res, next) {
   req.collection.find({},{limit:25, sort: [['_id',-1]]}).toArray(function(e, results){
-    if (e) return next(e)
+    if (e) {
+      console.log(e);
+      return next(e);
+    }
     res.send(results)
   })
 })
@@ -74,8 +77,10 @@ app.get('/collections/:collectionName', function(req, res, next) {
 // POST /collections/:collectionName
 app.post('/collections/:collectionName', function(req, res, next) {
   req.collection.insert(req.body, {}, function(e, results){
-    console.log(e);
-    if (e) return next(e)
+    if (e) {
+      console.log(e);
+      return next(e);
+    }
     res.send(results[0])
   })
 })
@@ -84,7 +89,10 @@ app.post('/collections/:collectionName', function(req, res, next) {
 // GET /collections/:collectionName/:id
 app.get('/collections/:collectionName/:id', function(req, res, next) {
   req.collection.findOne({_id: req.collection.id(req.params.id)}, function(e, result){
-    if (e) return next(e)
+    if (e) {
+      console.log(e);
+      return next(e);
+    }
     res.send(result)
   })
 })
@@ -103,7 +111,10 @@ app.put('/collections/:collectionName/:id', function(req, res, next) {
 // DELETE /collections/:collectionName
 app.del('/collections/:collectionName/:id', function(req, res, next) {
   req.collection.remove({_id: req.collection.id(req.params.id)}, function(e, result){
-    if (e) return next(e)
+    if (e) {
+      console.log(e);
+      return next(e);
+    }
     res.send((result===1)?{msg:'success'}:{msg:'error'})
   })
 })
