@@ -104,7 +104,11 @@ app.put('/collections/:collectionName/:id', function(req, res, next) {
   delete req.body._id
 
   req.collection.update({_id: req.collection.id(req.params.id)}, {$set:req.body}, {safe:true, multi:false}, function(e, result){
-    res.send((result===1)? 200 : 404 )
+    if( result === 1){
+      res.json(req.body);
+    } else {
+      res.status(500).end();
+    }
   })
 })
 
